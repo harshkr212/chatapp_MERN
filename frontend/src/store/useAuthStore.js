@@ -20,7 +20,8 @@ import axiosInstance from '../lib/axios.js'
         finally {
             set({ isCheckingAuth: false })
         }
-    }
+    },
+    signup:async ()=>{}
 
 }))
 export default useAuthStore
