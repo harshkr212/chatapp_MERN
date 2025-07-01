@@ -3,6 +3,7 @@ import User from "../model/user.model.js"
 const protectUser = async (req, res, next) => {
     try {
         const token = req.cookies.jwt;
+    
         if (!token) {
             return res.status(401).json({ message: "UnAuthorised Access-No Token is provided" });
         }
@@ -10,7 +11,7 @@ const protectUser = async (req, res, next) => {
         if (!decoded) {
             return res.status(401).json({ message: "UnAuthorised Access-Invalid Token" });
         }
-        const user = await User.findById(decoded._id).select("-password");
+        const user = await User.findById(decoded.userId).select("-password");
         if (!user) {
             return res.status(401).json({ message: "User Not Found" });
         }
