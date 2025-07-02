@@ -60,6 +60,21 @@ import toast from "react-hot-toast"
         } catch (error) {
             toast.error("Something went wrong")
         }
+    },
+    updateProfile:async(data)=>{
+        set({isUpdatingProfile:true})
+        try {
+            const res=await axiosInstance.put("auth/update-profile",data);
+            set({authUser:res.data});
+            toast.success("Updated Profile Picture Successfully")
+            
+        } catch (error) {
+            toast.error(error?.response?.data?.message || "Something went wrong")
+            
+        }
+        finally{
+            set({isUpdatingProfile:false})
+        }
     }
 
 }))
