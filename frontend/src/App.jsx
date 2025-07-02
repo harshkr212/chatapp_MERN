@@ -10,7 +10,9 @@ import HomePage from './pages/HomePage'
 import {Loader} from 'lucide-react'
 import { Navigate } from 'react-router-dom'
 import {Toaster} from 'react-hot-toast'
+import useThemeStore from './store/useThemeStore'
 const App = () => {
+  const {theme}=useThemeStore();
   const {authUser,checkAuth,isCheckingAuth}=useAuthStore();
   useEffect(()=>{
     checkAuth();
@@ -25,7 +27,7 @@ const App = () => {
 
   }
   return (
-    <div>
+    <div data-theme={theme}>
       <Routes>
         <Route path='/' element={authUser?<HomePage/>:<Navigate to="/login"/>}/>
         <Route path='/signup' element={!authUser?<SignupPage/>:<Navigate to="/"/>}/>
