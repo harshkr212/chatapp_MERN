@@ -16,8 +16,11 @@ const App = () => {
   const {authUser,checkAuth,isCheckingAuth}=useAuthStore();
   useEffect(()=>{
     checkAuth();
+    
+
   },[checkAuth])
   console.log(authUser);
+  console.log(theme);
   if(isCheckingAuth && !authUser){
     return (
       <div className="flex items-center justify-center h-screen">

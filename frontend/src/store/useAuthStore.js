@@ -8,6 +8,7 @@ import toast from "react-hot-toast"
     isLoginUp: false,
     isUpdatingProfile: false,
     isCheckingAuth: true,
+    onlineUsers:[],
     checkAuth: async () => {
         try {
             const res = await axiosInstance.get('/auth/checkUser');

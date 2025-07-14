@@ -5,7 +5,7 @@ import cloudnary from 'cloudinary'
 export const getUserSideBar = async (req, res) => {
     try {
         const userId = req.user._id;
-        const filterdUser = await User.findById({ _id: { $ne: userId } }).select("-password");
+        const filterdUser = await User.find({ _id: { $ne: userId } }).select("-password");
         res.status(200).json(filterdUser);
     } catch (error) {
         console.log("Error in getUserSideBar controller", error.message);
