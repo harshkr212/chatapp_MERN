@@ -1,6 +1,8 @@
 import User from "../model/user.model.js";
 import Message from '../model/message.model.js'
-import cloudnary from 'cloudinary'
+import cloudinary from "../lib/cloudnary.js";
+import { getReceiverSocketId ,io} from "../lib/socket.js";
+
 
 export const getUserSideBar = async (req, res) => {
     try {
@@ -33,7 +35,7 @@ export const sendMessage=async (req,res)=>{
         const {text,image}=req.body;
         let imageURL;
         if(image){
-            const UploadResponse=await cloudnary.uploader.upload(image);
+            const UploadResponse=await cloudinary.uploader.upload(image);
             imageURL=UploadResponse.secure_url;
 
         }
@@ -45,6 +47,13 @@ export const sendMessage=async (req,res)=>{
         })
         await newMessage.save();
         //todo realtime message functionality goes here=> socket.io
+
+        //getting the receiver socket id from the function
+        const receiverSocketId=getReceiverSocketId(receiverId);
+        //if receiverSockedId is present means the receiver is online and we are sending the message in the realtime
+        if(receiverSocketId){
+        io.to(receiverSocketId).emit("newMessage",newMessage);
+        }
         res.status(201).json(newMessage);
     } catch (error) {
          console.log("Error in sendMessage controller", error.message);

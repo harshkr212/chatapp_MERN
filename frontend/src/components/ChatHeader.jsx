@@ -5,7 +5,7 @@ import { X } from 'lucide-react';
 
 const ChatHeader = () => {
     const {onlineUsers}=useAuthStore();
-    const {selectedUser,setSelecteduser}=useChatStore();
+    const {selectedUser,setSelectedUser}=useChatStore();
   return (
     <div className='p-2.5 border-b border-base-300'>
         <div className="flex items-center justify-between">
@@ -22,7 +22,7 @@ const ChatHeader = () => {
 
             </div>
           
-            <button onClick={()=>{setSelecteduser(null)}}><X/>
+            <button onClick={()=>{setSelectedUser(null)}}><X/>
             </button>
             
 
