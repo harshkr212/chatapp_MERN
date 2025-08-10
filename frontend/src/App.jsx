@@ -30,7 +30,7 @@ const App = () => {
 
   }
   return (
-    <div data-theme={theme}>
+    <div>
       <Routes>
         <Route path='/' element={authUser?<HomePage/>:<Navigate to="/login"/>}/>
         <Route path='/signup' element={!authUser?<SignupPage/>:<Navigate to="/"/>}/>
