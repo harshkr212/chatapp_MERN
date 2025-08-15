@@ -2,10 +2,14 @@ import {Server } from 'socket.io'
 import http from 'http'
 import express from 'express'
 const app=express();
+const allowedOrigins=[
+      "http://localhost:5173",
+  "https://chatapp-mern-3-dtk4.onrender.com"
+]
 const server= http.createServer(app);
 const io=new Server(server,{
     cors:{
-        origin:["https://chatapp-mern-3-dtk4.onrender.com"],
+        origin:allowedOrigins,
     },
 });
 //sending the receiver sockedId to the caller
